@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BeGood</string>
+    <string name="onboarding_description_1">Here you can exchange clothes with strangers or friends, as well as give and take clothes without paying anything.</string>
+    <string name="onboarding_description_2">Write to the user whose product you are interested in. Maybe you'll even find new friends!</string>
+    <string name="onboarding_title_1">Exchange, Give away <font color="#46484C">and</font> Take away <font color="#46484C">clothes for free</font></string>
+    <string name="onboarding_title_2"><font color="#46484C">Write and chat</font> with other users</string>
+    <string name="skip"><u>Skip</u></string>
+    <string name="logo_description">BeGood Logo</string>
+    <string name="illustration_description">Illustration</string>
+    <string name="next_button_description">Next</string>
+</resources>
+
