@@ -43,7 +43,7 @@
             app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
 
         <TextView
-            android:id="@+id/btnSkip"
+            android:id="@+id/btnSkip2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -69,7 +69,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.695"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnSkip"
+            app:layout_constraintTop_toBottomOf="@+id/btnSkip2"
             tools:ignore="ImageContrastCheck" />
 
         <TextView
@@ -84,7 +84,7 @@
             android:lineSpacingMultiplier="1.2"
             android:text="@string/onboarding_title_2"
             android:textColor="@color/main_green"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +118,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageButton
-                android:id="@+id/button_next_left"
+                android:id="@+id/button_next_left2"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="48dp"
@@ -163,7 +163,7 @@
             </LinearLayout>
 
             <ImageButton
-                android:id="@+id/button_next_right"
+                android:id="@+id/button_next_right2"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="137dp"

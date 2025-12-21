@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="categoryAll" type="id" />
+    <item name="categoryTrousers" type="id" />
+    <item name="categoryTshirts" type="id" />
+    <item name="categorySweatshirts" type="id" />
+    <item name="categoryShoes" type="id" />
+    <item name="categoryAccessories" type="id" />
+    <item name="categoryJewelry" type="id" />
+</resources>

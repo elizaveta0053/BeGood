@@ -2,12 +2,26 @@
 <resources>
     <string name="app_name">BeGood</string>
     <string name="onboarding_description_1">Here you can exchange clothes with strangers or friends, as well as give and take clothes without paying anything.</string>
-    <string name="onboarding_description_2">Write to the user whose product you are interested in. Maybe you'll even find new friends!</string>
+    <string name="onboarding_description_2">Write to the user whose product you are interested in. Maybe you\'ll even find new friends!</string>
+    <string name="onboarding_description_3">Upload new products to your page and add products that you liked to your favorites.</string>
     <string name="onboarding_title_1">Exchange, Give away <font color="#46484C">and</font> Take away <font color="#46484C">clothes for free</font></string>
     <string name="onboarding_title_2"><font color="#46484C">Write and chat</font> with other users</string>
+    <string name="onboarding_title_3">Upload <font color="#46484C">new products</font>, add products to your <font color="#46484C">favorites</font></string>
     <string name="skip"><u>Skip</u></string>
     <string name="logo_description">BeGood Logo</string>
     <string name="illustration_description">Illustration</string>
     <string name="next_button_description">Next</string>
-</resources>
+    <string name="location">Location</string>
+    <string name="jerusalem_israel">Jerusalem, Israel</string>
+    <string name="search_on_be_good">Search on BE-GOOD</string>
 
+    <string name="categories">Categories</string>
+    <string name="all">All</string>
+    <string name="trousers">Trousers</string>
+    <string name="t_shirts">T-shirts</string>
+    <string name="sweatshirts">Sweatshirts</string>
+    <string name="shoes">Shoes</string>
+    <string name="accessories">Accessories</string>
+    <string name="jewelry">Jewelry</string>
+    <string name="the_filters_button">The filters button</string>
+</resources>
