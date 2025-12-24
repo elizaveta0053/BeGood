@@ -10,94 +10,82 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.activity.enableEdgeToEdge
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
+import androidx.recyclerview.widget.RecyclerView
+
 
 class MainActivity : AppCompatActivity() {
 
-    // Объявляем переменную для хранения настроек (память телефона)
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
+        enableEdgeToEdge() // Растягиваем контент под системные панели
         super.onCreate(savedInstanceState)
-        // Инициализируем "память". Файл будет называться "BeGoodPrefs"
+        
         sharedPreferences = getSharedPreferences("BeGoodPrefs", MODE_PRIVATE)
 
-        // 1. ПРОВЕРКА: Первый ли это вход?
-        // Мы ищем запись "isFirstRun". Если её нет (первый раз), то возвращаем true.
         val isFirstRun = sharedPreferences.getBoolean("isFirstRun", true)
 
         if (isFirstRun) {
-            // Если первый раз — показываем первый экран приветствия
             setHelloFrame1()
         } else {
-            // Если уже заходили — сразу на главный
             setHomeFrame()
         }
+    }
+
+    // Универсальная функция для настройки цвета иконок статус-бара
+    // isLight = true (темные иконки для белого фона), false (белые иконки для темного фона)
+    private fun setStatusBarIcons(isLight: Boolean) {
+        val windowInsetsController = WindowInsetsControllerCompat(window, window.decorView)
+        windowInsetsController.isAppearanceLightStatusBars = isLight
     }
 
     // --- ЭКРАНЫ ПРИВЕТСТВИЯ (ONBOARDING) ---
 
     private fun setHelloFrame1() {
         setContentView(R.layout.hello_frame1)
+        setStatusBarIcons(false) // Фон зеленый (темный) -> иконки белые
 
         val nextButton = findViewById<ImageButton>(R.id.button_next_right1)
         val skipButton = findViewById<TextView>(R.id.btnSkip1)
 
-        nextButton.setOnClickListener {
-            setHelloFrame2()
-        }
-
-        skipButton.setOnClickListener {
-            completeOnboarding() // Завершаем обучение и идем домой
-        }
+        nextButton.setOnClickListener { setHelloFrame2() }
+        skipButton.setOnClickListener { completeOnboarding() }
     }
 
     private fun setHelloFrame2() {
         setContentView(R.layout.hello_frame2)
+        setStatusBarIcons(false) // Зеленый фон -> белые иконки
 
         val nextButton = findViewById<ImageButton>(R.id.button_next_right2)
         val backButton = findViewById<ImageButton>(R.id.button_next_left2)
         val skipButton = findViewById<TextView>(R.id.btnSkip2)
 
-        nextButton.setOnClickListener {
-            setHelloFrame3()
-        }
-
-        backButton.setOnClickListener {
-            setHelloFrame1()
-        }
-
-        skipButton.setOnClickListener {
-            completeOnboarding()
-        }
+        nextButton.setOnClickListener { setHelloFrame3() }
+        backButton.setOnClickListener { setHelloFrame1() }
+        skipButton.setOnClickListener { completeOnboarding() }
     }
 
     private fun setHelloFrame3() {
         setContentView(R.layout.hello_frame3)
+        setStatusBarIcons(false)
 
         val backButton = findViewById<ImageButton>(R.id.button_next_left3)
-        val startButton = findViewById<ImageButton>(R.id.button_next_right3) // Это кнопка Finish/Start
+        val startButton = findViewById<ImageButton>(R.id.button_next_right3)
         val skipButton = findViewById<TextView>(R.id.btnSkip3)
 
-        // Твоё условие: left3 должен кидать на frame3 (но логичнее вернуть назад на frame2, сделал frame2)
-        backButton.setOnClickListener {
-            setHelloFrame2()
-        }
-
+        backButton.setOnClickListener { setHelloFrame2() }
         startButton.setOnClickListener {
-            setHomeFrame()
             completeOnboarding()
         }
-
-        skipButton.setOnClickListener {
-            completeOnboarding()
-        }
+        skipButton.setOnClickListener { completeOnboarding() }
     }
 
-    // Эта функция записывает в память, что обучение пройдено, и открывает Home
     private fun completeOnboarding() {
         sharedPreferences.edit {
-            putBoolean("isFirstRun", false) // Ставим метку "больше не первый раз"
+            putBoolean("isFirstRun", false)
         }
         setHomeFrame()
     }
@@ -106,10 +94,16 @@ class MainActivity : AppCompatActivity() {
     // --- ГЛАВНЫЙ ЭКРАН (HOME) ---
 
     private fun setHomeFrame() {
-        setContentView(R.layout.home_frame)
 
-        // 3. ЛОГИКА КАТЕГОРИЙ
-        // Находим все кнопки категорий
+        setContentView(R.layout.home_frame)
+        setStatusBarIcons(true) // Фон белый -> иконки темные
+
+        // Настройка отступов для Home
+        applySystemInsets(findViewById(R.id.homeRoot), findViewById(R.id.headerLayout), findViewById(R.id.layoutBottomNav))
+
+        // Инициализация RecyclerView
+        setupRecyclerView()
+
         val categoryAll = findViewById<Button>(R.id.categoryAll)
         val categoryTrousers = findViewById<Button>(R.id.categoryTrousers)
         val categoryTshirts = findViewById<Button>(R.id.categoryTshirts)
@@ -118,60 +112,76 @@ class MainActivity : AppCompatActivity() {
         val categoryAccessories = findViewById<Button>(R.id.categoryAccessories)
         val categoryJewelry = findViewById<Button>(R.id.categoryJewelry)
 
-        // Собираем их в список для удобства
         val allCategories = listOf(
             categoryAll, categoryTrousers, categoryTshirts,
             categorySweatshirts, categoryShoes, categoryAccessories, categoryJewelry
         )
 
-        // Навешиваем слушатель нажатия на КАЖДУЮ кнопку
         allCategories.forEach { categoryButton ->
             categoryButton.setOnClickListener {
-                // Когда нажали на кнопку, обновляем внешний вид всех кнопок
                 updateCategoriesUI(selectedCategory = categoryButton, allCategories = allCategories)
             }
         }
 
-        // По умолчанию выбираем "All" при старте
         updateCategoriesUI(categoryAll, allCategories)
 
-
-        // 4. ЛОГИКА УВЕДОМЛЕНИЙ (Notification Dot)
         val notificationDot = findViewById<View>(R.id.notificationDot)
-
-        // Имитация данных: true - есть новые, false - нет
-        val hasNewNotifications = checkNotificationsFromServer()
-
-        if (hasNewNotifications) {
+        if (checkNotificationsFromServer()) {
             notificationDot.visibility = View.VISIBLE
         } else {
             notificationDot.visibility = View.GONE
         }
     }
 
-    // Вспомогательная функция для покраски кнопок
+    private fun setupRecyclerView() {
+        val rvProducts = findViewById<RecyclerView>(R.id.rvProducts)
+
+        // example
+        val products = listOf(
+            Product(1, "Classic T-Shirt", 4.5, "Jerusalem", "New", R.drawable.img_onboarding_1),
+            Product(2, "Blue Jeans", 4.8, "Tel Aviv", "Used", R.drawable.img_onboarding_2, isFavorite = true),
+            Product(3, "Hoodie", 4.2, "Haifa", "New", R.drawable.img_onboarding_3),
+            Product(4, "Sneakers", 5.0, "Eilat", "Sale", R.drawable.img_onboarding_1),
+            Product(2, "Blue Jeans", 4.8, "Tel Aviv", "Used", R.drawable.img_onboarding_2, isFavorite = true),
+            Product(3, "Hoodie", 4.2, "Haifa", "New", R.drawable.img_onboarding_3),
+            Product(4, "Sneakers", 5.0, "Eilat", "Sale", R.drawable.img_onboarding_1)
+
+        )
+
+        rvProducts.adapter = ProductAdapter(products)
+    }
+
+    // Функция для правильной обработки системных отступов (верх и низ)
+    private fun applySystemInsets(root: View, header: View, footer: View) {
+        ViewCompat.setOnApplyWindowInsetsListener(root) { _, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            
+            // Добавляем отступ сверху для хедера (чтобы время не накладывалось на иконки)
+            header.setPadding(header.paddingLeft, systemBars.top, header.paddingRight, header.paddingBottom)
+            
+            // Добавляем отступ снизу для навигации (чтобы полоска жестов не закрывала кнопки)
+            footer.setPadding(0, 0, 0, systemBars.bottom)
+            
+            insets
+        }
+    }
+
     private fun updateCategoriesUI(selectedCategory: TextView, allCategories: List<TextView>) {
         val whiteColor = ContextCompat.getColor(this, R.color.white)
         val grayColor = ContextCompat.getColor(this, R.color.categories)
 
         for (button in allCategories) {
             if (button == selectedCategory) {
-                // 1. Активируем состояние "selected" для селектора
                 button.isSelected = true
-                // 2. Меняем цвет текста
                 button.setTextColor(whiteColor)
             } else {
-                // 1. Деактивируем состояние
                 button.isSelected = false
-                // 2. Возвращаем серый цвет текста
                 button.setTextColor(grayColor)
             }
         }
     }
 
-    // Заглушка для проверки уведомлений
     private fun checkNotificationsFromServer(): Boolean {
-        // Здесь в будущем будет логика проверки базы данных
-        return true // Пока всегда возвращаем "да, есть уведомления" для теста
+        return true
     }
 }

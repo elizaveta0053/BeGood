@@ -11,4 +11,6 @@
     <color name="location">#B7B7B7</color>
     <color name="light_white">#E7E7EF</color>
     <color name="orange">#F5824C</color>
+    <color name="main_stroke">#E8EFF3</color>
+    <color name="red">#FF6060</color>
 </resources>

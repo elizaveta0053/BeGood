@@ -24,4 +24,5 @@
     <string name="accessories">Accessories</string>
     <string name="jewelry">Jewelry</string>
     <string name="the_filters_button">The filters button</string>
+    <string name="trait">|</string>
 </resources>
