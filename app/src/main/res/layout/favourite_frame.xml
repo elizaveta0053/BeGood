@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/favouriteRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <View
+        android:id="@+id/headerBg"
+        android:layout_width="match_parent"
+        android:layout_height="111dp"
+        android:background="@drawable/bg_header_rounded"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvHeaderTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/favourite"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/sora"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="22dp"
+        app:layout_constraintBottom_toBottomOf="@id/headerBg"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvEmptyState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sora"
+        android:text="@string/there_is_no_favorite"
+        android:textColor="@color/categories"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/layoutBottomNav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerBg"
+        tools:ignore="TextContrastCheck" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutBottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <View
+            android:id="@+id/bottomNavBackground"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/bg_bottom_nav_rounded_top"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="DisableBaselineAlignment">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:id="@+id/navHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    tools:ignore="UselessParent">
+
+                    <ImageView
+                        android:id="@+id/navHome2"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_home"
+                        app:tint="@color/categories"
+                        tools:ignore="ContentDescription" />
+
+                    <View
+                        android:id="@+id/navHomeDot"
+                        android:layout_width="12dp"
+                        android:layout_height="5dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/nav_dot"
+                        android:visibility="invisible" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:layout_marginStart="-15dp"
+                    tools:ignore="UselessParent">
+
+                    <ImageView
+                        android:id="@+id/navHeart"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_heart_filled"
+                        app:tint="@color/main_green"
+                        tools:ignore="ContentDescription" />
+
+                    <View
+                        android:id="@+id/navHeartDot"
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/nav_dot"
+                        android:backgroundTint="@color/main_green" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:layout_marginStart="15dp"
+                    tools:ignore="UselessParent">
+
+                    <ImageView
+                        android:id="@+id/navChat"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_chat_bubble"
+                        app:tint="@color/categories"
+                        tools:ignore="ContentDescription" />
+
+                    <View
+                        android:id="@+id/navChatDot"
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/nav_dot"
+                        android:visibility="invisible" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    tools:ignore="UselessParent">
+
+                    <ImageView
+                        android:id="@+id/navUser"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_user_outline"
+                        app:tint="@color/categories"
+                        tools:ignore="ContentDescription" />
+
+                    <View
+                        android:id="@+id/navUserDot"
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/nav_dot"
+                        android:visibility="invisible" />
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/fab"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="42dp"
+            android:background="@drawable/bg_circle_white_shadow"
+            android:src="@drawable/ic_plus"
+            android:elevation="6dp"
+            android:padding="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="ContentDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

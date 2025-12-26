@@ -25,4 +25,6 @@
     <string name="jewelry">Jewelry</string>
     <string name="the_filters_button">The filters button</string>
     <string name="trait">|</string>
+    <string name="favourite">Favourite</string>
+    <string name="there_is_no_favorite">There is no favorite</string>
 </resources>

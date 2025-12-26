@@ -94,7 +94,6 @@ class MainActivity : AppCompatActivity() {
     // --- ГЛАВНЫЙ ЭКРАН (HOME) ---
 
     private fun setHomeFrame() {
-
         setContentView(R.layout.home_frame)
         setStatusBarIcons(true) // Фон белый -> иконки темные
 
@@ -103,6 +102,11 @@ class MainActivity : AppCompatActivity() {
 
         // Инициализация RecyclerView
         setupRecyclerView()
+
+        // Кнопка перехода в избранное
+        findViewById<View>(R.id.navHeart).setOnClickListener {
+            setFavouriteFrame()
+        }
 
         val categoryAll = findViewById<Button>(R.id.categoryAll)
         val categoryTrousers = findViewById<Button>(R.id.categoryTrousers)
@@ -149,6 +153,21 @@ class MainActivity : AppCompatActivity() {
         )
 
         rvProducts.adapter = ProductAdapter(products)
+    }
+
+    // --- ЭКРАН ИЗБРАННОГО (FAVOURITE) ---
+
+    private fun setFavouriteFrame() {
+        setContentView(R.layout.favourite_frame)
+        setStatusBarIcons(false)
+
+        // Используем favouriteRoot и headerBg
+        applySystemInsets(findViewById(R.id.favouriteRoot), findViewById(R.id.headerBg), findViewById(R.id.layoutBottomNav)
+        )
+
+        findViewById<View>(R.id.navHome).setOnClickListener {
+            setHomeFrame()
+        }
     }
 
     // Функция для правильной обработки системных отступов (верх и низ)
